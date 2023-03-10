@@ -1,5 +1,5 @@
 /*******************************************************************************
- COMPILE: gcc -o dialog_menu_example dialog_menu_example.c -ldialog
+ COMPILE: gcc -o coffee_machine coffee_machine.c -ldialog
  RUN: ./dialog_menu_example
  DOCUMENTATION: https://invisible-island.net/dialog/manpage/dialog_lib.html
  AUTHOR: Vitaly Castaño Solana
