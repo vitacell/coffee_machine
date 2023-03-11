@@ -35,6 +35,7 @@
 #define CAPUCCINO_PRICE		187
 #define MOCHA_PRICE			151
 #define COIN				"$"
+#define CENT				"¢"
 
 // Same for indgredients
 #define SUGAR_PRICE		20
@@ -108,7 +109,7 @@ void ByeMessage() // just a bye message on program exit/finish
     usleep(1500000); // pause for few seconds, to see the message, like infobox
     end_dialog(); // stop dialog
     //clear_screen();
-    //CLEAR_TERMINAL;
+    CLEAR_TERMINAL;
     exit(0); // finalize the program, quit
 }
 /*
@@ -135,7 +136,7 @@ unsigned short AcceptCancel(unsigned short retval) // control return value for A
     return retval;
 }*/
 
-void InsertMoney(int temp_money)
+void InsertMoney(int temp_money) // function for showing the total price amount
 {
     //dialog_vars.no_lines = 1;
     char temp_char[100];
@@ -199,10 +200,10 @@ void Menu() // main menu
     char *ingredients[] = // ingredients addons
     {
         //{tag,  item,  status}
-        "1",  "Sugar",  	"off", // "on" if you want this selected by default on start
-        "2",  "Milk",   	"off",
-        "3",  "Sweetener",	"off",
-        "4",  "Ice",		"off"
+        "1", " Sugar     " 	STR(SUGAR_PRICE) CENT,		"off", // "on" if you want this selected by default on start
+        "2", " Milk      " 	STR(MILK_PRICE) CENT,		"off",
+        "3", " Sweetener "	STR(SWEETENER_PRICE) CENT,	"off",
+        "4", " Ice       " 	STR(ICE_PRICE) CENT,		"off"
     };
 
     do
@@ -381,8 +382,8 @@ void Menu() // main menu
         init_dialog(stdin, stdout); // input + output dialog init
         dialog_vars.cancel_label = "Back";
         if (dialog_checklist( // create a checklist with the defined options
-                    "Choose your colors", // title
-                    "Select at least one color:", // message
+                    "Do you want some ingredient?", // title
+                    "Select ingredients you want:", // message
                     0, // height
                     0, // width
                     0, // menu height
@@ -396,7 +397,7 @@ void Menu() // main menu
             //end_dialog(); // stop dialog
             //continue;
         }
-        else
+        else if (dialog_vars.input_result != NULL)
         {
             char *selected_ingredients = dialog_vars.input_result; // variable for storing the selected options, out of do/while loop for reusing
             printf("*selected_ingredients is = %s\n", selected_ingredients);
